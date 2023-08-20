@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://drsnoqdk238tp"]
+
+[ext_resource type="Script" path="res://temp/Text.gd" id="1_effkk"]
+[ext_resource type="PackedScene" uid="uid://cslrbfkwmam1t" path="res://scenes/dialogue_manager.tscn" id="2_j1ctu"]
+[ext_resource type="Script" path="res://temp/CustomChoice.gd" id="3_w10ls"]
+
+[node name="DialogueTest" type="Node2D"]
+
+[node name="Text" type="Label" parent="."]
+offset_right = 129.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 64
+text = "Test"
+script = ExtResource("1_effkk")
+
+[node name="Progress" type="Button" parent="Text"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 5.0
+offset_right = 545.0
+offset_bottom = 58.0
+text = "Progress"
+
+[node name="SubmitText" type="Button" parent="Text"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 168.0
+offset_right = 572.0
+offset_bottom = 199.0
+text = "Submit"
+
+[node name="DialogueManager" parent="Text" instance=ExtResource("2_j1ctu")]
+
+[node name="AddText" type="TextEdit" parent="Text"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 159.0
+offset_right = 291.0
+offset_bottom = 439.0
+
+[node name="CustomChoice" type="OptionButton" parent="Text"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 604.0
+offset_top = 160.0
+offset_right = 813.0
+offset_bottom = 203.0
+script = ExtResource("3_w10ls")
+
+[node name="PlayerChoice" type="OptionButton" parent="Text"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 10.0
+offset_right = 892.0
+offset_bottom = 53.0
+
+[connection signal="pressed" from="Text/Progress" to="Text" method="_on_progress_pressed"]
+[connection signal="pressed" from="Text/SubmitText" to="Text" method="_on_submit_text_pressed"]
+[connection signal="end_of_dialogue" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_end_of_dialogue"]
+[connection signal="message" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_message"]
