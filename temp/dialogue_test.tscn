@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://drsnoqdk238tp"]
+[gd_scene load_steps=3 format=3 uid="uid://drsnoqdk238tp"]
 
 [ext_resource type="Script" path="res://temp/Text.gd" id="1_effkk"]
 [ext_resource type="PackedScene" uid="uid://cslrbfkwmam1t" path="res://scenes/dialogue_manager.tscn" id="2_j1ctu"]
-[ext_resource type="Script" path="res://temp/CustomChoice.gd" id="3_w10ls"]
 
 [node name="DialogueTest" type="Node2D"]
 
 [node name="Text" type="Label" parent="."]
-offset_right = 129.0
-offset_bottom = 91.0
-theme_override_font_sizes/font_size = 64
+offset_right = 261.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 16
 text = "Test"
+autowrap_mode = 2
 script = ExtResource("1_effkk")
 
-[node name="Progress" type="Button" parent="Text"]
+[node name="StartDialog" type="Button" parent="Text"]
 layout_mode = 0
 offset_left = 283.0
 offset_top = 5.0
 offset_right = 545.0
 offset_bottom = 58.0
-text = "Progress"
+text = "Start Dialog"
 
 [node name="SubmitText" type="Button" parent="Text"]
 layout_mode = 0
@@ -27,7 +27,7 @@ offset_left = 304.0
 offset_top = 168.0
 offset_right = 572.0
 offset_bottom = 199.0
-text = "Submit"
+text = "Add to dialog"
 
 [node name="DialogueManager" parent="Text" instance=ExtResource("2_j1ctu")]
 
@@ -38,23 +38,41 @@ offset_top = 159.0
 offset_right = 291.0
 offset_bottom = 439.0
 
-[node name="CustomChoice" type="OptionButton" parent="Text"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 604.0
-offset_top = 160.0
-offset_right = 813.0
-offset_bottom = 203.0
-script = ExtResource("3_w10ls")
+[node name="TextSpeed" type="Timer" parent="Text"]
+wait_time = 0.05
 
-[node name="PlayerChoice" type="OptionButton" parent="Text"]
+[node name="AddChoice" type="Button" parent="Text"]
 layout_mode = 0
-offset_left = 558.0
-offset_top = 10.0
-offset_right = 892.0
-offset_bottom = 53.0
+offset_left = 307.0
+offset_top = 243.0
+offset_right = 569.0
+offset_bottom = 286.0
+text = "Add to choices"
 
-[connection signal="pressed" from="Text/Progress" to="Text" method="_on_progress_pressed"]
+[node name="Choices" type="OptionButton" parent="Text"]
+layout_mode = 0
+offset_left = 599.0
+offset_top = 1.0
+offset_right = 975.0
+offset_bottom = 50.0
+
+[node name="ChooseChoice" type="Button" parent="Text"]
+layout_mode = 0
+offset_left = 597.0
+offset_top = 72.0
+offset_right = 984.0
+offset_bottom = 113.0
+text = "Confirm Choice"
+
+[connection signal="read" from="Text" to="Text/DialogueManager" method="_read_dialog"]
+[connection signal="submit_choice" from="Text" to="Text/DialogueManager" method="_submit_choice"]
+[connection signal="pressed" from="Text/StartDialog" to="Text" method="_on_start_dialog_pressed"]
 [connection signal="pressed" from="Text/SubmitText" to="Text" method="_on_submit_text_pressed"]
 [connection signal="end_of_dialogue" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_end_of_dialogue"]
 [connection signal="message" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_message"]
+[connection signal="start_of_choices" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_start_of_choices"]
+[connection signal="start_of_dialogue" from="Text/DialogueManager" to="Text" method="_on_dialogue_manager_start_of_dialogue"]
+[connection signal="timeout" from="Text/TextSpeed" to="Text" method="_on_text_speed_timeout"]
+[connection signal="pressed" from="Text/AddChoice" to="Text" method="_on_add_choice_pressed"]
+[connection signal="item_selected" from="Text/Choices" to="Text" method="_on_choices_item_selected"]
+[connection signal="pressed" from="Text/ChooseChoice" to="Text" method="_on_choose_choice_pressed"]
