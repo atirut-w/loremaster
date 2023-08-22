@@ -10,6 +10,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ohgod" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rldsu")
+
 [node name="dialogue_panel" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -47,7 +56,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "This is a [i]rich text[/i] dialogue. You can use [u]BBCode[/u] formattings."
+text = "* [i]He has awakened[/i]"
 
 [node name="choices_container" type="VBoxContainer" parent="dialogue_panel/dialogue_hbox"]
 layout_mode = 2
