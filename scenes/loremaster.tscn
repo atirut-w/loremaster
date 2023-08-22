@@ -127,3 +127,6 @@ animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, 2, 6, 2, 6, 22, -6, 22)

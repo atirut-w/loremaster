@@ -11,8 +11,10 @@ var time_per_move = 0.3
 var steps_to_move = Vector2(0,0)
 var current_step = Vector2(0,0)
 
+var colliding = false
+
 func _input(event):
-	if event.is_action_pressed("move_to"):
+	if !colliding && event.is_action_pressed("move_to"):
 		#Assuming zoom.x == zoom.y
 		var camera_zoom = $Camera2D.zoom.x
 		#Actual in this case refers as to what is displayed on screen
@@ -74,7 +76,7 @@ func _input(event):
 		steps_to_move = Vector2(horizontal_steps_to_move, vertical_steps_to_move)
 
 func _process(_delta):
-	if !tween || !tween.is_running():
+	if !colliding && (!tween || !tween.is_running()):
 		#Handle keyboard input every frame
 		if Input.is_action_pressed("move_down"):
 			#When a player is not on a line, request a movement of two steps up
@@ -107,6 +109,16 @@ func _process(_delta):
 			_move_vertical(-1)
 
 func _move_vertical(direction):
+	await __move_vertical(direction)
+	
+	steps_to_move -= Vector2(0,direction)
+	
+func _move_horizontal(direction):
+	await __move_horizontal(direction)
+	
+	steps_to_move -= Vector2(direction,0)
+	
+func __move_vertical(direction):
 	if direction > 0:
 		$AnimatedSprite2D.play("walk_down")
 	else:
@@ -118,10 +130,10 @@ func _move_vertical(direction):
 	tween.tween_property(self, "position", position + Vector2(0,1) * direction * vertical_step_distance,time_per_move * vertical_step_distance / horizontal_step_distance)
 	
 	await tween.finished
-	steps_to_move -= Vector2(0,direction)
+	
 	current_step += Vector2(0, direction)
 	
-func _move_horizontal(direction):
+func __move_horizontal(direction):
 	$AnimatedSprite2D.play("walk_side")
 	$AnimatedSprite2D.flip_h = direction > 0
 	
@@ -129,7 +141,7 @@ func _move_horizontal(direction):
 	tween.tween_property(self, "position", position + Vector2(1,0) * direction * horizontal_step_distance,time_per_move)
 	
 	await  tween.finished
-	steps_to_move -= Vector2(direction,0)
+	
 	current_step += Vector2(direction, 0)
 
 func _player_on_line():
@@ -137,3 +149,21 @@ func _player_on_line():
 	#Since a step in any direction will flip this property
 	#Hence needs an even number of steps overall
 	return abs(int(current_step.x) % 2) != abs(int(current_step.y) % 2)
+
+func _on_collision(_body):
+	colliding = true
+	
+	var direction_x = sign(steps_to_move.x)
+	var direction_y = sign(steps_to_move.y)
+	
+	await tween.finished
+	
+	steps_to_move = Vector2(0,0)
+	if direction_x != 0:
+		__move_horizontal(-direction_x)
+	elif direction_y != 0:
+		__move_vertical(-direction_y)
+		
+	await tween.finished
+	
+	colliding = false
