@@ -8,9 +8,9 @@ func register_dialogue_controller(ctrl: DialogueSystem) -> void:
 	controller = ctrl
 	
 	controller.visible = false
-	controller.portrait_rect.visible = false
-	controller.name_label.visible = false
-	controller.choices_container.visible = false
+	controller._set_speaker_portrait(null)
+	controller._set_speaker_name("")
+	controller._set_choices([])
 
 
 func show_dialogue(dialogue: String) -> void:
@@ -30,3 +30,8 @@ func set_speaker_portrait(portrait: Texture) -> void:
 
 func set_speaker_name(name: String) -> void:
 	controller._set_speaker_name(name)
+
+
+func show_choices(choices: Array[String]) -> int:
+	controller._set_choices(choices)
+	return await controller.choice_selected

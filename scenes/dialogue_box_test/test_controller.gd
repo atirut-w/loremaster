@@ -4,13 +4,7 @@ extends DialogueSystem
 @export var dialogue_speed := 25.0
 
 var animating := false
-
-
-func _ready() -> void:
-	portrait_rect = $dialogue_hbox/character_info/portrait
-	name_label = $dialogue_hbox/character_info/name
-	dialogue_label = $dialogue_hbox/dialogue_label
-	choices_container = $dialogue_hbox/choices_container
+@onready var dialogue_label := $dialogue_hbox/dialogue_label
 
 
 func _set_speaker_portrait(portrait: Texture) -> void:
@@ -22,7 +16,7 @@ func _set_speaker_portrait(portrait: Texture) -> void:
 
 
 func _set_speaker_name(name: String) -> void:
-	if name != null:
+	if name != "":
 		$dialogue_hbox/character_info/name.visible = true
 		$dialogue_hbox/character_info/name.text = name
 	else:
@@ -31,6 +25,24 @@ func _set_speaker_name(name: String) -> void:
 
 func _set_dialogue_message(msg: String) -> void:
 	$dialogue_hbox/dialogue_label.text = msg
+
+
+# TODO: Test
+func _set_choices(choices: Array[String]) -> void:
+	var container := $dialogue_hbox/choices_container
+	
+	for child in container.get_children():
+		child.queue_free()
+	if choices.size() == 0:
+		return
+	
+	for i in choices.size():
+		var choice := choices[i]
+		var button := Button.new()
+		button.text = choice
+		button.pressed.connect(func(): choice_selected.emit(i))
+		
+		container.add_child(button)
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -3,11 +3,7 @@ extends Control
 
 
 signal dialogue_completed
-
-var portrait_rect: TextureRect
-var name_label: Label
-var dialogue_label: RichTextLabel
-var choices_container: Control
+signal choice_selected(id: int)
 
 
 func _animate() -> void:
@@ -23,4 +19,8 @@ func _set_speaker_name(name: String) -> void:
 
 
 func _set_dialogue_message(msg: String) -> void:
+	pass
+
+
+func _set_choices(choices: Array[String]) -> void:
 	pass
