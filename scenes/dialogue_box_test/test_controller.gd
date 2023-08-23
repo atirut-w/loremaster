@@ -13,6 +13,26 @@ func _ready() -> void:
 	choices_container = $dialogue_hbox/choices_container
 
 
+func _set_speaker_portrait(portrait: Texture) -> void:
+	if portrait != null:
+		$dialogue_hbox/character_info/portrait.visible = true
+		$dialogue_hbox/character_info/portrait.texture = portrait
+	else:
+		$dialogue_hbox/character_info/portrait.visible = false
+
+
+func _set_speaker_name(name: String) -> void:
+	if name != null:
+		$dialogue_hbox/character_info/name.visible = true
+		$dialogue_hbox/character_info/name.text = name
+	else:
+		$dialogue_hbox/character_info/name.visible = false
+
+
+func _set_dialogue_message(msg: String) -> void:
+	$dialogue_hbox/dialogue_label.text = msg
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_accept"):
