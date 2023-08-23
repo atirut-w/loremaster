@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7uwp0jiw7020"]
+[gd_scene load_steps=5 format=3 uid="uid://c7uwp0jiw7020"]
 
 [ext_resource type="Script" path="res://scenes/dialogue_box_test/dialogue_box_test.gd" id="1_mdaeo"]
 [ext_resource type="Texture2D" uid="uid://5khi826jfm0r" path="res://icon.svg" id="1_rldsu"]
+[ext_resource type="Theme" uid="uid://cqwqnlumbtref" path="res://themes/ui_dialogue.tres" id="3_483qr"]
 [ext_resource type="Script" path="res://scenes/dialogue_box_test/test_controller.gd" id="3_jomu1"]
 
 [node name="dialogue_box_test" type="Control"]
@@ -31,6 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+theme = ExtResource("3_483qr")
 script = ExtResource("3_jomu1")
 
 [node name="dialogue_hbox" type="HBoxContainer" parent="dialogue_panel"]

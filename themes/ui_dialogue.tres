@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cqwqnlumbtref"]
+
+[ext_resource type="FontFile" uid="uid://dvtgpd2pepup2" path="res://antiquity-print.ttf" id="1_lyed3"]
+
+[resource]
+default_font = ExtResource("1_lyed3")
