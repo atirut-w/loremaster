@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dexgljdnn3pit"
-path="res://.godot/imported/char_walk_side6.png-0d24042c6f6a036c2e7f321b0523ba04.ctex"
+uid="uid://cei0oq71p571v"
+path="res://.godot/imported/char_idle-sheet.png-862b6078e4f7fc09276f0b1f875d7596.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animations/char_walk_side6.png"
-dest_files=["res://.godot/imported/char_walk_side6.png-0d24042c6f6a036c2e7f321b0523ba04.ctex"]
+source_file="res://animations/char_idle-sheet.png"
+dest_files=["res://.godot/imported/char_idle-sheet.png-862b6078e4f7fc09276f0b1f875d7596.ctex"]
 
 [params]
 
