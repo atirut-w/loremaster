@@ -15,12 +15,12 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.is_action_pressed("ui_cancel"):
+		if event.is_action_pressed("ui_accept"):
 			if animating:
 				animating = false
 				dialogue_label.visible_ratio = 1.0
-		if event.is_action_pressed("ui_accept"):
-			dialogue_completed.emit()
+			else:
+				dialogue_completed.emit()
 
 
 func _animate() -> void:
