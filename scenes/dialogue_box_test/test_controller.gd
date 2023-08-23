@@ -32,3 +32,5 @@ func _physics_process(delta: float) -> void:
 	if animating:
 		if dialogue_label.visible_ratio < 1.0:
 			dialogue_label.visible_ratio += (dialogue_speed / float(dialogue_label.text.length())) * delta
+		else:
+			animating = false
