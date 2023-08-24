@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://df51cwhdick57"]
+
+[ext_resource type="Theme" uid="uid://cqwqnlumbtref" path="res://themes/ui_dialogue.tres" id="1_2d58x"]
+[ext_resource type="Script" path="res://scenes/dialogue_box_test/test_controller.gd" id="2_p8n8v"]
+[ext_resource type="Texture2D" uid="uid://5khi826jfm0r" path="res://icon.svg" id="3_s30lq"]
+
+[node name="dialogue_panel" type="PanelContainer"]
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2d58x")
+script = ExtResource("2_p8n8v")
+
+[node name="dialogue_hbox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="character_info" type="VBoxContainer" parent="dialogue_hbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="portrait" type="TextureRect" parent="dialogue_hbox/character_info"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+texture = ExtResource("3_s30lq")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="name" type="Label" parent="dialogue_hbox/character_info"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dialogue_label" type="RichTextLabel" parent="dialogue_hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "* [i]He has awakened[/i]"
+
+[node name="choices_container" type="VBoxContainer" parent="dialogue_hbox"]
+layout_mode = 2
+alignment = 1
