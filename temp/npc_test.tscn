@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm277hoj28e8a"]
+
+[ext_resource type="Script" path="res://temp/npc_test.gd" id="1_fwt8r"]
+[ext_resource type="PackedScene" uid="uid://df51cwhdick57" path="res://prefabs/dialogue_panel.tscn" id="2_w4w4e"]
+[ext_resource type="PackedScene" uid="uid://cslrbfkwmam1t" path="res://scenes/dialogue_manager.tscn" id="3_7bn4h"]
+[ext_resource type="Script" path="res://temp/test_npc.gd" id="4_w10jn"]
+[ext_resource type="Script" path="res://scripts/classes/world_events.gd" id="5_j5am6"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_3wws8"]
+
+[node name="NPCTest" type="Node"]
+script = ExtResource("1_fwt8r")
+
+[node name="dialogue_panel" parent="." instance=ExtResource("2_w4w4e")]
+anchors_preset = 10
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_bottom = 167.0
+grow_vertical = 1
+
+[node name="DialogueManager" parent="." instance=ExtResource("3_7bn4h")]
+
+[node name="TestNPC" type="Node" parent="."]
+script = ExtResource("4_w10jn")
+name_on_dialogue = "Hunter Axe"
+portrait = SubResource("AnimatedTexture_3wws8")
+
+[node name="WorldEvents" type="Node" parent="."]
+script = ExtResource("5_j5am6")
