@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://df51cwhdick57"]
 
 [ext_resource type="Theme" uid="uid://cqwqnlumbtref" path="res://themes/ui_dialogue.tres" id="1_2d58x"]
-[ext_resource type="Script" path="res://scenes/dialogue_box_test/test_controller.gd" id="2_p8n8v"]
+[ext_resource type="Script" path="res://scripts/dialogue_controller.gd" id="2_xf1rg"]
 [ext_resource type="Texture2D" uid="uid://5khi826jfm0r" path="res://icon.svg" id="3_s30lq"]
 
 [node name="dialogue_panel" type="PanelContainer"]
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_2d58x")
-script = ExtResource("2_p8n8v")
+script = ExtResource("2_xf1rg")
 
 [node name="dialogue_hbox" type="HBoxContainer" parent="."]
 layout_mode = 2
