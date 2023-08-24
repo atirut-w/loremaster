@@ -7,6 +7,10 @@ var animating := false
 @onready var dialogue_label := $dialogue_hbox/dialogue_label
 
 
+func _ready() -> void:
+	DialogueManager.register_dialogue_controller(self)
+
+
 func _set_speaker_portrait(portrait: Texture) -> void:
 	if portrait != null:
 		$dialogue_hbox/character_info/portrait.visible = true

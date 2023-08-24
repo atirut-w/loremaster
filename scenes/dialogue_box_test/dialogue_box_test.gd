@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready() -> void:
-	DialogueManager.register_dialogue_controller($dialogue_panel)
+#	DialogueManager.register_dialogue_controller($dialogue_panel)
 	await DialogueManager.show_dialogue("Hi!")
 	
 	DialogueManager.set_speaker_portrait(preload("res://icon.svg"))
