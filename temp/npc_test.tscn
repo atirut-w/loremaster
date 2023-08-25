@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm277hoj28e8a"]
+[gd_scene load_steps=8 format=3 uid="uid://dm277hoj28e8a"]
 
 [ext_resource type="Script" path="res://temp/npc_test.gd" id="1_fwt8r"]
 [ext_resource type="PackedScene" uid="uid://df51cwhdick57" path="res://prefabs/dialogue_panel.tscn" id="2_w4w4e"]
-[ext_resource type="Script" path="res://temp/test_npc.gd" id="4_w10jn"]
+[ext_resource type="Script" path="res://scripts/npcs/jared.gd" id="3_21gxv"]
 [ext_resource type="Script" path="res://scripts/classes/world_events.gd" id="5_j5am6"]
-
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_3wws8"]
+[ext_resource type="Script" path="res://temp/NPCs.gd" id="5_x06vh"]
+[ext_resource type="Script" path="res://scripts/npcs/samuel.gd" id="6_ka6qu"]
+[ext_resource type="Script" path="res://scripts/npcs/fortune.gd" id="7_grj0a"]
 
 [node name="NPCTest" type="Node"]
 script = ExtResource("1_fwt8r")
@@ -17,10 +18,33 @@ anchor_bottom = 0.0
 offset_bottom = 167.0
 grow_vertical = 1
 
-[node name="TestNPC" type="Node" parent="."]
-script = ExtResource("4_w10jn")
-name_on_dialogue = "Hunter Axe"
-portrait = SubResource("AnimatedTexture_3wws8")
+[node name="Jared" type="Node" parent="."]
+script = ExtResource("3_21gxv")
+name_on_dialogue = "King Jared V"
 
 [node name="WorldEvents" type="Node" parent="."]
 script = ExtResource("5_j5am6")
+
+[node name="NPCs" type="OptionButton" parent="."]
+offset_left = 40.0
+offset_top = 205.0
+offset_right = 369.0
+offset_bottom = 331.0
+script = ExtResource("5_x06vh")
+
+[node name="Interact" type="Button" parent="."]
+offset_left = 438.0
+offset_top = 204.0
+offset_right = 605.0
+offset_bottom = 325.0
+text = "Interact"
+
+[node name="Samuel" type="Node" parent="."]
+script = ExtResource("6_ka6qu")
+name_on_dialogue = "Fisherman Samuel"
+
+[node name="Fortune" type="Node" parent="."]
+script = ExtResource("7_grj0a")
+name_on_dialogue = "Librarian Fortune"
+
+[connection signal="pressed" from="Interact" to="." method="_on_interact_pressed"]

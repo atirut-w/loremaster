@@ -1,8 +1,11 @@
 extends Node
 
-func _ready():
-	$TestNPC.register_event_tracker($WorldEvents)
+
+func _on_interact_pressed():
+	var npc = find_child($NPCs.get_item_text($NPCs.selected))
+	npc.register_event_tracker($WorldEvents)
+	$Interact.disabled = true
 	
-	await $"TestNPC".interact()
-	await $"TestNPC".interact()
-	await $"TestNPC".interact()
+	await npc.interact()
+
+	$Interact.disabled = false
