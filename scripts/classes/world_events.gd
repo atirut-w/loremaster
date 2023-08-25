@@ -59,6 +59,7 @@ const KNOW_NPC = "known_npcs"
 const KNOW_LORE = "known_lore"
 const AS_TOLD_BY = "heard_from"
 const DO = "completed_actions"
+const IN_FRONT_OF = "seen_by"
 	
 #Use the functions below to check events easier
 func has_player_met(name: String) -> bool:
@@ -83,4 +84,10 @@ func has_player_done(action: String) -> bool:
 	return _did_player([DO,action])
 
 func make_player_do(action: String) -> void:
-	return _make_player([DO, action])
+	_make_player([DO,action])
+
+func has_player_done_action_in_front_of_npc(action: String, npc_name: String) -> bool:
+	return _did_player([DO,action,IN_FRONT_OF,npc_name])
+	
+func make_player_do_action_in_front_of_npc(action: String, npc_name: String) -> void:
+	_make_player([DO,action,IN_FRONT_OF,npc_name])
