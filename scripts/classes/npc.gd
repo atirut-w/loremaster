@@ -5,17 +5,11 @@ extends Node
 @export var portrait: AnimatedTexture
 var name_in_events: String
 var event_tracker: WorldEvents
-var dialogue_manager: DialogueManager
 
 func register_event_tracker(new_event_tracker: WorldEvents) -> void:
 	if event_tracker != null:
 		event_tracker.queue_free()
 	event_tracker = new_event_tracker
-	
-func register_dialogue_manager(new_dialogue_manager: DialogueManager) -> void:
-	if dialogue_manager != null:
-		dialogue_manager.queue_free()
-	dialogue_manager = new_dialogue_manager
 
 #All interactions start and end the same, to change dialogue based on NPC change play_interaction
 func interact() -> void:
@@ -24,11 +18,11 @@ func interact() -> void:
 	_close_interaction()
 	
 func _close_interaction() -> void:
-	dialogue_manager.hide_dialogue()
+	DialogueManager.hide_dialogue()
 	
 func _prepare_interaction() -> void:
-	dialogue_manager.set_speaker_name(name)
-	dialogue_manager.set_speaker_portrait(portrait)
+	DialogueManager.set_speaker_name(name)
+	DialogueManager.set_speaker_portrait(portrait)
 	
 #Define custom character scripts here along utilising the methods of the eventTracker and helper functions
 #and constants below
@@ -39,11 +33,11 @@ func play_interaction() -> void:
 #A sequence is a function causes the NPC to interact with the player
 #For example play_interaction is a sequence
 func say(dialogue: String) -> void:
-	await dialogue_manager.show_dialogue(dialogue)
+	await DialogueManager.show_dialogue(dialogue)
 	
 	
 func choice(choices: Array[String], sequences: Array[Callable]) -> void:
-	var option = await dialogue_manager.show_choices(choices)
+	var option = await DialogueManager.show_choices(choices)
 	
 	await sequences[option].call()
 	
