@@ -58,14 +58,24 @@ func initial_encounter():
 					await say("That is all I will say for now about fish legends. I hope you found that information useful!")
 					
 				
-				await choice(["I'd love to hear more about legendary fish!", "I think that's all I need to know..."], [learn_more_about_fish,empty_sequence])
+				await choice({
+					"I'd love to hear more about legendary fish!": learn_more_about_fish,
+					"I think that's all I need to know...": empty_sequence
+				})
 			
-			await choice(["How interesting! Tell me more!", "I think I've heard enough..."], [hear_more_about_fish,empty_sequence])
+			await choice({
+				"How interesting! Tell me more!": hear_more_about_fish,
+				"I think I've heard enough": empty_sequence
+			})
 			
 		var cannot_know = func ():
 			await say("I apologize for intruding. I hope you will find whatever you may need.")
 		
-		await choice(["The Giant's Cave","Legendary Fish","I'm afraid you cannot know"], [the_giants_cave, legendary_fish, cannot_know])
+		await choice({
+			"The Giant's Cave": the_giants_cave,
+			"Legendary Fish": legendary_fish,
+			"I'm afraid you cannot know": cannot_know
+		})
 		
 	var tell_lie = func ():
 		await say("Oh really? I have never seen you around these ports.")
@@ -83,11 +93,19 @@ func initial_encounter():
 			var came_to_travel = func ():
 				await say("Well, I hope you enjoy your travels!")
 			
-			await choice(["I have come to fish in new waters!","I have came to travel"],[fish_in_new_waters,came_to_travel])
+			await choice({
+				"I have come to fish in new waters!": fish_in_new_waters,
+				"I have come to travel": came_to_travel
+			})
 		
-		await choice(["D... Dnalhsif"],[lie_about_dnalhsif])
+		await choice({
+			"D... Dnalhsif": lie_about_dnalhsif
+		})
 	
-	await choice(["I am a loremaster","I too am a fisherman"], [tell_truth,tell_lie])
+	await choice({
+		"I am a loremaster": tell_truth,
+		"I too am a fisherman": tell_lie
+	})
 	
 	
 func later_encounters():
@@ -97,6 +115,8 @@ func later_encounters():
 func help():
 	await say("Is there anyway I can help you?")
 	
-	await choice(["Not right now!"], [empty_sequence])
+	await choice({
+		"Not right now!": empty_sequence
+	})
 	
 	await say("Alright, goodbye!")

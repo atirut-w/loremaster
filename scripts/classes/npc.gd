@@ -35,15 +35,19 @@ func say(dialogue: String) -> void:
 	await DialogueManager.show_dialogue(dialogue)
 	
 	
-func choice(choices: Array[String], sequences: Array[Callable]) -> void:
+func choice(choices_sequence_pairs: Dictionary) -> void:
+	var choices = choices_sequence_pairs.keys()
 	var option = await DialogueManager.show_choices(choices)
 	
-	await sequences[option].call()
+	await choices_sequence_pairs[choices[option]].call()
 	
 	
 func told_about(lore: String) -> bool:
 	return event_tracker.has_player_talked_to_NPC_about_lore(name_in_events, lore)
 	
+	
+func player_heard_of_but_not_told_about(lore: String) -> bool:
+	return !told_about(lore) && event_tracker.has_player_learnt(lore)
 	
 func teach(lore: String) -> void:
 	event_tracker.make_player_learn_lore_by_NPC(name_in_events, lore)
@@ -67,6 +71,20 @@ func introduce(not_met_before_sequence: Callable, has_met_sequence: Callable) ->
 
 func empty_sequence():
 	pass
+	
+
+#Boolean array methods to help with dialogues	
+func all(bools: Array[bool]) -> bool:
+	return bools.all(_identity)
+	
+
+func any(bools: Array[bool]) -> bool:
+	return bools.any(_identity)
+
+
+func _identity(x: Variant) -> Variant:
+	return x 	
+	
 			
 #List of all characters that can be used in play_interaction
 const CHARACTER_SAMUEL = "samuel"

@@ -28,13 +28,19 @@ func opening_sequence():
 			
 			trigger_event(EVENT_DOUBT_KING_JARED)
 		
-		await choice(["What a noble cause!", "Why haven't you helped the sicked before?"], [praise_the_king,doubt_the_king])
+		await choice({
+			"What a noble cause!": praise_the_king,
+			"Why haven't you helped the sick before?": doubt_the_king
+		})
 		
 	var question_about_whereabouts = func ():
 		await say("Our scholars have gathered that the Giant's Cave is located in the Markan-Natura Plains. Search for information around there.")
 		teach(LORE_GIANTS_CAVE)
 	
-	await choice(["What will you do with the treasure?", "Whereabouts is the Giant's Cave?"], [question_about_treasure, question_about_whereabouts])
+	await choice({
+		"What will you do with the treasure?": question_about_treasure,
+		"Whereabouts is the Giant's Cave?": question_about_whereabouts
+	})
 	
 	if seen_event(EVENT_DOUBT_KING_JARED):
 		await say("Now be gone! Your quest will be full of challenges, so set forth!")
