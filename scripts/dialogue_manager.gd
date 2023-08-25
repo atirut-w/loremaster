@@ -34,4 +34,6 @@ func set_speaker_name(name: String) -> void:
 
 func show_choices(choices: Array[String]) -> int:
 	controller._set_choices(choices)
-	return await controller.choice_selected
+	var result := await controller.choice_selected as int
+	controller._set_choices([])
+	return result
