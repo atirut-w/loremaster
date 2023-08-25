@@ -32,7 +32,7 @@ func set_speaker_name(name: String) -> void:
 	controller._set_speaker_name(name)
 
 
-func show_choices(choices: Array[String]) -> int:
+func show_choices(choices) -> int:
 	controller._set_choices(choices)
 	var result := await controller.choice_selected as int
 	controller._set_choices([])
