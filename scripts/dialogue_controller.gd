@@ -32,7 +32,7 @@ func _set_dialogue_message(msg: String) -> void:
 
 
 # TODO: Test
-func _set_choices(choices: Array[String]) -> void:
+func _set_choices(choices) -> void:
 	var container := $dialogue_hbox/choices_container
 	
 	for child in container.get_children():
@@ -41,7 +41,7 @@ func _set_choices(choices: Array[String]) -> void:
 		return
 	
 	for i in choices.size():
-		var choice := choices[i]
+		var choice = choices[i]
 		var button := Button.new()
 		button.text = choice
 		button.pressed.connect(func(): choice_selected.emit(i))
